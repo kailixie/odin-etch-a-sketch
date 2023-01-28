@@ -5,29 +5,31 @@ html {
 body {
     margin: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .header {
     background-color: darkgreen;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .main {
     background-color: white;
-}
-
-.totalGrid {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
-    width: 1000px;
-    height: 1000px;
 }
 
-.grid {
-    flex: 1;
-    border: 2px solid black;
+#grid {
+    display: grid;
+    height: 750px;
+    width: 750px;
+    justify-content: stretch;
+    align-items: stretch;
 }
 
-.grid > * {
-
+.cell {
+    background-color: white;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
