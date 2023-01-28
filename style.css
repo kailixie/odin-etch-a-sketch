@@ -1,5 +1,5 @@
 html {
-    background-color: darkgreen;
+    background-color: slategray;
 }
 
 body {
@@ -10,20 +10,29 @@ body {
 }
 
 .header {
-    background-color: darkgreen;
     font-family: 'Press Start 2P', cursive;
+    text-align: center;
 }
 
 .main {
-    background-color: white;
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#sidebar {
+    height: 750px;
+    width: 200px;
+    background-color: black;
+    opacity: 0.5;
+    border: 1px solid;
+    margin-right: 10px;
 }
 
 #grid {
     display: grid;
     height: 750px;
     width: 750px;
+    outline: 2px solid black;
     justify-content: stretch;
     align-items: stretch;
 }
@@ -33,3 +42,4 @@ body {
     box-sizing: border-box;
     border: 1px solid black;
 }
+
