@@ -1,7 +1,6 @@
 
-
-const grid = document.getElementById("grid")
-const sidebar = document.getElementsById("sidebar")
+const grid = document.getElementById("grid");
+const sidebar = document.getElementById("sidebar");
 
 // Grid creation based on input
 function createGrid(cellNum) {
@@ -12,6 +11,29 @@ function createGrid(cellNum) {
         cell.classList.add("cell")
         grid.appendChild(cell)
     }
+};
+
+const rangeSlider = document.querySelector("#rangeSlider");
+const sliderText = document.getElementById("sliderText");
+
+function clearGrid() {
+    
 }
 
-createGrid(50)
+function changeGridSize() {
+    newRangeSize = rangeSlider.value
+    // updateSliderText();
+    createGrid(newRangeSize);
+    console.log(newRangeSize)
+};
+
+function updateSliderText(newRangeSize) {
+    sliderText.innerHTML = `Grid Size: ${newRangeSize} x ${newRangeSize}`;
+};
+
+rangeSlider.addEventListener('change', changeGridSize);
+
+
+
+//default size
+window.onload = createGrid(16)
