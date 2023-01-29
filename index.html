@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <script src="app.js" defer></script> 
+    <script src="new-app.js" defer></script> 
 </head>
 
 <body>
@@ -21,14 +21,19 @@
 
     <div class="main">
 
-        <div id="sidebar">
-            <div class="sliderContainer">
-                <p id="slideText"> Grid Size: 16 x 16</p>
-                <input type="range" min="16" max="64" value="16" class="slider" id="rangeSlider">
-            </div>
+        <div class="sidebar">
+            <p id="penColorText"> Pen Color: </p>
+            <input type="color" class="styles" id="penColorPicker">
+            <p id="backgroundColorText"> Background Color: </p>
+            <input type="color" class="styles" id="backgroundColorPicker">
+            <button class="styles" id="darkenBtn"> Darken </button>
+            <button class="styles" id="lightenBtn"> Lighten </button>
+            <button class="styles" id="clearBtn"> Clear </button>
+            <p class="slider" id="slideText"> Grid Size: 16 x 16</p>
+            <input type="range" min="4" max="100" defaultValue="16" class="slider" id="rangeSlider">
         </div>
 
-        <div id="grid"></div>
+        <div class="grid"></div>
 
     </div>
 
