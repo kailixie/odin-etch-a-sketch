@@ -14,11 +14,27 @@ body {
     width: 125px;
     height: 30px;
     margin-bottom: 15px;
-    /* border-radius: 10%; */
     background-color: #1d1c25;
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px; 
+}
+
+input[type="color"] {
+    -webkit-appearance: none;
+    border: none;
+    height: 80px;
+    width: 80px;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0px;
+}
+
+input[type="color"]::-webkit-color-swatch {
+    border-style: outset;
+    border-width: 2px;
+    border-radius: 100%;
 }
 
 .btn-on {
@@ -47,7 +63,7 @@ body {
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
-    /* gap: 10px; */
+    gap: 5px;
 }
 
 .sidebar > p {
@@ -55,7 +71,9 @@ body {
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px; 
     padding: 0;
-    margin: 5px;
+    margin: 1px;
+    width: 100%;
+    text-align: center;
 }
 
 #rangeSlider {

@@ -12,12 +12,9 @@ const lightBtn = document.getElementById("lightenBtn");
 const clearBtn = document.getElementById("clearBtn");
 const eraseBtn = document.getElementById("eraseBtn");
 
-var gridCells = grid.querySelectorAll("div");
-
 let cells = [];
 
-
-// CONTROLS: 
+// GRID: 
 
 // Range Bar & Text for Grid Size:
 const rangeSlider = document.querySelector("#rangeSlider");
@@ -28,17 +25,6 @@ sliderText.textContent = `Grid Size: ${rangeSlider.value} x ${rangeSlider.value}
 rangeSlider.addEventListener("mousemove", function () {
     sliderText.textContent = `Grid Size: ${rangeSlider.value} x ${rangeSlider.value}`;
 })
-
-// Pen Color:
-
-
-penColorPicker.addEventListener("change", () => {
-    solidBtn.classList.add("btn-on");
-    colors = penColorPicker.value;
-    usePen("solidMode", colors);
-})
-
-// FUNCTIONS:
 
 // Clear Grid:
 function clearGrid () {
@@ -67,8 +53,7 @@ function createGrid() {
     }
 }
 
-
-// Adding Color:
+// PEN COLOR:
 
 function usePen(colorMode, colors) {
     let gridCells = grid.querySelectorAll("div");
@@ -94,35 +79,16 @@ function usePen(colorMode, colors) {
             });
         } else if (colorMode === "darkMode") {
             gridCell.addEventListener("mouseenter", (e) => {
-                if (!e.target.dataset.shade) {
-                    e.target.setAttribute("data-shade", "1");
-                } else {
-                    let shadeLevel = parseInt(e.target.getAttribute("data-shade"));
-                    shadeLevel++;
-                    e.target.setAttribute("data-shade", `${shadeLevel}`);
-                }
-                if (e.target.style.backgroundColor == "" || e.target.backgroundColor == "transparent") {
-                    e.target.style.backgroundColor = bgColorPicker.value;
-                }
-                e.target.style.backgroundColor = adjust(RGBToHex, e.target.style.backgroundColor, -15);
+                // e.target.style.opacity += 0.1
             });
         } else if (colorMode === "lightMode") {
             gridCell.addEventListener("mouseenter", (e) => {
-                if (!e.target.dataset.shade) {
-                    e.target.setAttribute("data-shade", "-1");
-                } else {
-                    let shadeLevel = parseInt(e.target.getAttribute("data-shade"));
-                    shadeLevel--;
-                    e.target.setAttribute("data-shade", `${shadeLevel}`);
-                }
-                if (e.target.style.backgroundColor == "" || e.target.backgroundColor == "transparent") {
-                    e.target.style.backgroundColor = bgColorPicker.value;
-                }
-                e.target.style.backgroundColor = adjust(RGBToHex, e.target.style.backgroundColor, +15);
+                // e.target.style.opacity -= 0.1
             });
         }
     })
 }
+
 
 // Button Selection:
 
@@ -141,22 +107,22 @@ function chooseColorMode() {
             removeCurrentMode(modeButtons);
             if (modeButton.id === "redBtn") {
                 redBtn.classList.add("btn-on");
-                usePen("redMode", ['#680108', '#95020B', '#9C1D18', '#B90B04', '#E33319', '#E96D40', '#fe7307', '#febd8a', '#f6ad92', '#fd9d8a', '#fd7f67', '#fe9443', '#ee622e']);
+                usePen("redMode", ['rgb(104,1,8)', 'rgb(149,2,11)', 'rgb(156,29,24)', 'rgb(185,11,4)', 'rgb(227,51,25)', 'rgb(233,109,64)', 'rgb(254,115,7)', 'rgb(254,189,138)', 'rgb(246,173,146)', 'rgb(253,157,138)', 'rgb(253,127,103)', 'rgb(254,148,67)', 'rgb(238,98,46)']);
             } else if (modeButton.id === "blueBtn") {
                 blueBtn.classList.add("btn-on");
-                usePen("blueMode", ['#1e6173', '#2e7294', '#243363', '#300054', '#c8e9ef', '#348fb6', '#b2a4c9', '#631c99', '#3484ad', '#8bc0d4', '#1a5973', '#094261', '#1285c3'])
+                usePen("blueMode", ['rgb(30,97,115)', 'rgb(46,114,148)', 'rgb(36,51,99)', 'rgb(48,0,84)', 'rgb(200,233,239)', 'rgb(52,143,182)', 'rgb(178,164,201)', 'rgb(99,28,153)', 'rgb(52,132,173)', 'rgb(139,192,212)', 'rgb(26,89,115)', 'rgb(9,66,97)', 'rgb(18,133,195)'])
             } else if (modeButton.id === "greenBtn") {
                 greenBtn.classList.add("btn-on");
-                usePen("greenMode", ['#4b6043', '#658354', '#75975e', '#95bb72', '#a3c585', '#b3cf99', '#c7ddb5', '#ddead1', '#276221', '#3b8132', '#46923c', '#52a447', '#5bb450']);
+                usePen("greenMode", ['rgb(75,96,67)', 'rgb(101,131,84)', 'rgb(117,151,94)', 'rgb(149,187,114)', 'rgb(163,197,133)', 'rgb(179,207,153)', 'rgb(199,221,181)', 'rgb(221,234,209)', 'rgb(39,98,33)', 'rgb(59,129,50)', 'rgb(70,146,60)', 'rgb(82,164,71)', 'rgb(91,180,80)']);
             } else if (modeButton.id === "darkenBtn") {
                 darkBtn.classList.add("btn-on");
-                usePen("darkMode", "#fefefe");
+                usePen("darkMode", "rgb(254,254,254)");
             } else if (modeButton.id === "lightenBtn") {
                 lightBtn.classList.add("btn-on");
-                usePen("lightMode", "#fefefe");
+                usePen("lightMode", "rgb(254,254,254)");
             } else if (modeButton.id === "eraseBtn") {
                 eraseBtn.classList.add("btn-on"); 
-                usePen("eraseMode", "#fefefe");
+                usePen("eraseMode", "rgb(254,254,254)");
             } else if (modeButton.id === "solidBtn") {
                 solidBtn.classList.add("btn-on");
                 colors = penColorPicker.value;
@@ -172,9 +138,15 @@ function chooseColorMode() {
 rangeSlider.addEventListener("change", () => changeGridSize(rangeSlider.value));
 clearBtn.addEventListener("click", clearGrid);
 bgColorPicker.addEventListener("input", (e) => grid.style.backgroundColor = e.target.value);
+penColorPicker.addEventListener("change", () => {
+    solidBtn.classList.add("btn-on");
+    colors = penColorPicker.value;
+    usePen("solidMode", colors);
+})
 
 
 //ON LOAD DEFAULT:
+
 createGrid();
 chooseColorMode();
 usePen("solidMode", penColorPicker.value);
