@@ -5,6 +5,8 @@ const clearBtn = document.getElementById("clearBtn");
 const darkBtn = document.getElementById("darkenBtn");
 const lightBtn = document.getElementById("lightenBtn");
 
+var gridCells = grid.querySelectorAll("div");
+
 let cells = [];
 
 
@@ -20,24 +22,23 @@ rangeSlider.addEventListener("mousemove", function () {
     sliderText.textContent = `Grid Size: ${rangeSlider.value} x ${rangeSlider.value}`;
 })
 
-// Color & Color Selectors:
+// Pen Color:
 
-let currentPenColor = "black";
-let currentBgColor = "rgba(255, 255, 255, 0)";
+let defaultPenColor = "rgba(0, 0, 0, 1)";
+let defaultBgColor = "rgba(255, 255, 255, 1)";
 
 let penColorPicker = document.querySelector("#penColorPicker")
-penColorPicker.addEventListener("change", function() {
-    let newPenColor = penColorPicker.value;
+penColorPicker.addEventListener("input", (e) => {
+    newPenColor = e.target.value;
+    usePen();
 })
 
+// Background Color: 
 let bgColorPicker = document.querySelector("#backgroundColorPicker")
-bgColorPicker.addEventListener("change", function() {
-    let newBgColor = bgColorPicker.value;
+bgColorPicker.addEventListener("input", (e) => {
+    newBgColor = e.target.value;
+    grid.style.backgroundColor = newBgColor;
 })
-
-
-//
-
 
 
 // FUNCTIONS:
@@ -67,13 +68,23 @@ function createGrid() {
         cells[i].classList.add("cells");
         grid.appendChild(cells[i]);
     
-    var gridCells = grid.querySelectorAll("div");
+
     }
 }
 
-rangeSlider.addEventListener("change", function() {
-    changeGridSize(rangeSlider.value);
-})
+
+// Adding Color:
+
+function colorGrid() {
+    cells.target.style.backgroundColor = penColorPicker.value;
+}
+
+function usePen() {
+    let gridCells = grid.querySelectorAll("div");
+    gridCells.forEach(gridCell => gridCell.addEventListener("mouseenter", function() {
+        gridCell.style.backgroundColor = penColorPicker.value;
+    })
+)}
 
 // Random Color: 
 
@@ -87,6 +98,11 @@ rangeSlider.addEventListener("change", function() {
 // EVENT LISTENERS:
 
 // Move Slider:
+rangeSlider.addEventListener("change", function() {
+    changeGridSize(rangeSlider.value);
+})
+
+
 
 
 //ON LOAD DEFAULT:
