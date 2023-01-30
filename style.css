@@ -10,9 +10,20 @@ body {
 }
 
 .styles {
-    appearance: none;
+    /* appearance: none; */
     width: 125px;
-    height: 50px;
+    height: 30px;
+    margin-bottom: 15px;
+    /* border-radius: 10%; */
+    background-color: #1d1c25;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 14px; 
+}
+
+.btn-on {
+    background-color: #1d1c25;
+    opacity: 0.3;
 }
 
 .header {
@@ -26,34 +37,38 @@ body {
 }
 
 .sidebar {
-    height: 750px;
+    height: 735px;
     width: 200px;
     background-color: #1d1c25;
     outline: 1px solid #1d1c25;
+    padding-top: 15px;
     margin-right: 10px;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
     align-content: flex-start;
-    gap: 10px;
+    /* gap: 10px; */
 }
 
 .sidebar > p {
     color: white;
     font-family: 'Courier New', Courier, monospace;
     font-size: 14px; 
+    padding: 0;
+    margin: 5px;
 }
 
-.rangeSlider {
+#rangeSlider {
     appearance: none;
     margin-top: 10px;
+    margin-bottom: 25px;
     outline: none;
     opacity: 0.5;
     -webkit-transition: .2s;
     transition: opacity .2s;
     }
 
-.rangeSlider:hover{
+#rangeSlider:hover{
     opacity: 1;
 }
 
@@ -66,7 +81,7 @@ height: 5px;
 input[type=range]::-webkit-slider-thumb {
 -webkit-appearance: none;
 border: 2px solid  rgb(59,173,227);
-border-radius: 10%;
+border-radius: 30%;
 height: 20px;
 width: 20px;
 margin: 3px;
