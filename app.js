@@ -1,39 +1,36 @@
-
-const grid = document.getElementById("grid");
-const sidebar = document.getElementById("sidebar");
-
-// Grid creation based on input
-function createGrid(cellNum) {
-    grid.style.gridTemplateColumns = `repeat(${cellNum}, 1fr)`;
-    grid.style.gridTemplateRows = `repeat(${cellNum}, 1fr)`;
-    for (let i = 0; i < (cellNum * cellNum); i++) {
-        let cell = document.createElement("div")
-        cell.classList.add("cell")
-        grid.appendChild(cell)
-    }
-};
-
-const rangeSlider = document.querySelector("#rangeSlider");
-const sliderText = document.getElementById("sliderText");
-
-function clearGrid() {
-    
+function usePen(colorMode, colors) {
+    let gridCells = grid.querySelectorAll("div");
+    gridCells.forEach((gridCell) => {
+        if (colorMode === "redMode" || colorMode === "blueMode" || colorMode === "greenMode"){
+            const randomColor = colors[Math.floor(Math.random() * colors.length,)];
+            gridCell.addEventListener("mouseenter", (e) => {
+                e.target.style.backgroundColor = randomColor;
+                e.target.setAttribute("data-inked", "true");
+                e.target.removeAttribute("data-shade");
+            });
+        } else if (colorMode === "solidMode") {
+            gridCell.addEventListener("mouseenter", (e) => {
+                e.target.style.backgroundColor = colors;
+                e.target.setAttribute("data-inked", "true");
+                e.target.removeAttribute("data-shade");
+            });
+        } else if (colorMode === "eraseMode") {
+            gridCell.addEventListener("mouseenter", (e) => {
+                e.target.style.backgroundColor = "";
+                e.target.removeAttribute("data-inked");
+                e.target.removeAttribute("data-shade");
+            });
+        } else if (colorMode === "darkMode") {
+            gridCell.addEventListener("mouseenter", darken(e));
+            // gridCell.addEventListener("mouseenter", (e) => {
+            //     let currentColor = darken(e);
+            //     e.target.style = `background-color: rgba(${currentColor})`;
+            // });
+        } else if (colorMode === "lightMode") {
+            gridCell.addEventListener("mouseenter", lighten(e));
+            // gridCell.addEventListener("mouseenter", (e) => {
+            //     e.target.style.backgroundColor = lighten(e);
+            // });
+        }
+    })
 }
-
-function changeGridSize() {
-    newRangeSize = rangeSlider.value
-    // updateSliderText();
-    createGrid(newRangeSize);
-    console.log(newRangeSize)
-};
-
-function updateSliderText(newRangeSize) {
-    sliderText.innerHTML = `Grid Size: ${newRangeSize} x ${newRangeSize}`;
-};
-
-rangeSlider.addEventListener('change', changeGridSize);
-
-
-
-//default size
-window.onload = createGrid(16)
