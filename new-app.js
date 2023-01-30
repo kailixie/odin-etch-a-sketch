@@ -1,7 +1,8 @@
 //INITIAL: 
 const sidebar = document.querySelector(".sidebar")
 const grid = document.querySelector(".grid");
-const bgColorPicker = document.querySelector("#backgroundColorPicker")
+const penColorPicker = document.querySelector("#penColorPicker");
+const bgColorPicker = document.querySelector("#backgroundColorPicker");
 const solidBtn = document.getElementById("solidBtn");
 const redBtn = document.getElementById("redBtn");
 const blueBtn = document.getElementById("blueBtn");
@@ -30,17 +31,12 @@ rangeSlider.addEventListener("mousemove", function () {
 
 // Pen Color:
 
-// // let defaultPenColor = "rgba(0, 0, 0, 0.5)";
-// let defaultBgColor = "rgba(255, 255, 255, 1)";
 
-// let penColorPicker = document.querySelector("#penColorPicker")
-// penColorPicker.addEventListener("input", (e) => {
-//     newPenColor = e.target.value;
-// })
-
-// Background Color: 
-
-
+penColorPicker.addEventListener("change", () => {
+    solidBtn.classList.add("btn-on");
+    colors = penColorPicker.value;
+    usePen("solidMode", colors);
+})
 
 // FUNCTIONS:
 
@@ -73,10 +69,6 @@ function createGrid() {
 
 
 // Adding Color:
-
-// function colorGrid() {
-//     cells.target.style.backgroundColor = penColorPicker.value;
-// }
 
 function usePen(colorMode, colors) {
     let gridCells = grid.querySelectorAll("div");
@@ -132,7 +124,6 @@ function usePen(colorMode, colors) {
     })
 }
 
-
 // Button Selection:
 
 const modeButtons = document.querySelectorAll(".colorMode");
@@ -186,3 +177,4 @@ bgColorPicker.addEventListener("input", (e) => grid.style.backgroundColor = e.ta
 //ON LOAD DEFAULT:
 createGrid();
 chooseColorMode();
+usePen("solidMode", penColorPicker.value);
